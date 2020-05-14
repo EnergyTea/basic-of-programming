@@ -21,22 +21,23 @@ BEGIN{ReadDigit}
     D := -1;   
 END;{ReadDigit}       
 PROCEDURE ReadNumber(VAR F: TEXT; VAR N: INTEGER);
+CONST
+  MAXINT = 32767;
 BEGIN
   N := 0;
   WHILE NOT(EOLN(F)) AND (D <> -1) 
   DO
     BEGIN
       ReadDigit(F, D);
-      IF (D <> -1) AND (N < 32767)
+      IF (D <> -1) OR (N < MAXINT)
       THEN
-        N := 10 * N + D 
-      ELSE
-       IF (N >= 32767)
-       THEN
-         BEGIN
-           N := -1;
-           D := -1
-         END  
+        N := 10 * N + D; 
+      IF (N >= MAXINT)
+      THEN
+        BEGIN
+          N := -1;
+          D := -1
+        END  
     END 
 END;  
 BEGIN {SumDigit}
