@@ -1,6 +1,4 @@
 ﻿PROGRAM Stat(INPUT, OUTPUT);
-CONST
-  MAXINT = 32767;
 VAR         
   Overflow: BOOLEAN;
   Counter, Num, Min, Max, Middle, Sum, D: INTEGER;
@@ -9,7 +7,9 @@ VAR
  Ch: CHAR;
 BEGIN{ReadDigit}
   D := 0;
-  READ(F, Ch);  
+  IF NOT(EOLN(F)) 
+  THEN
+    READ(F, Ch);  
   IF Ch = '1' THEN D := 1 ELSE
   IF Ch = '2' THEN D := 2 ELSE
   IF Ch = '3' THEN D := 3 ELSE
@@ -30,7 +30,7 @@ BEGIN
   DO
     BEGIN
       ReadDigit(F, D);
-      IF (D <> -1) AND (N < MAXINT)
+      IF (D <> -1) OR ((MAXINT DIV 10 = N) AND (MAXINT MOD 10 < D)) OR (MAXINT DIV 10 < N) 
       THEN
         N := 10 * N + D; 
       IF (N >= MAXINT)
@@ -45,7 +45,7 @@ BEGIN {Stat}
   Min := 32767;
   Max := 0;
   Overflow := FALSE;
-  WHILE NOT EOLN(INPUT) AND(NOT Overflow) AND (Counter + 1 <= MAXINT DIV 100)
+  WHILE NOT EOLN(INPUT) AND(NOT Overflow) AND (Counter + 1 < MAXINT DIV 100)
   DO
     BEGIN
       ReadNumber(INPUT, Num);

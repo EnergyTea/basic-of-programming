@@ -7,35 +7,35 @@ TYPE
              END;
 VAR
   Root: Tree;
-  Ch: CHAR;
-PROCEDURE Insert(VAR Ptr:Tree; Data: CHAR);
+  Ch: CHAR;  
+PROCEDURE Insert(VAR Ptr: Tree; Data: CHAR);
 BEGIN {Insert}
   IF Ptr = NIL
   THEN
     BEGIN
       NEW(Ptr);
-      Ptr^.Ch := Data;
+      Ptr^.Ch := Data;         
       Ptr^.LLink := NIL;
       Ptr^.RLink := NIL;
     END
   ELSE
-    IF Data <= Ptr^.Ch
+    IF Ptr^.Ch >= Data
     THEN
       Insert(Ptr^.LLink, Data)
     ELSE
       Insert(Ptr^.RLink, Data)
 END;  {Insert}
-PROCEDURE PrintTree(Ptr: Tree);
+PROCEDURE PrintTree(VAR Ptr: Tree);
 BEGIN {PrintTree}
   IF Ptr <> NIL
-  THEN 
+  THEN
     BEGIN
       PrintTree(Ptr^.LLink);
       WRITE(Ptr^.Ch);
       PrintTree(Ptr^.RLink);
-    END;
+    END
 END;  {PrintTree}
-BEGIN {TreeSort}
+BEGIN {TreeSort}       
   Root := NIL;
   WHILE NOT EOLN
   DO

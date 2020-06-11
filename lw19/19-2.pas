@@ -19,45 +19,45 @@ BEGIN{SortDate}
   WHILE NOT EOF(FInput)
   DO
     BEGIN
-    RESET(DateFile);
-    ReadDate(FInput,D);
-    READLN(FInput);
+      RESET(DateFile);
+      ReadDate(FInput,D);
+      READLN(FInput);
     IF (D.Mo <> NoMonth)
     THEN
-    BEGIN
-    REWRITE(TFile);
+      BEGIN
+        REWRITE(TFile);
         Copying := TRUE;
         WHILE NOT EOF(DateFile) AND Copying
         DO
-        BEGIN
+          BEGIN
             READ(DateFile, VarDate);
             IF Less(VarDate, D)
             THEN
-            WRITE(TFile, VarDate)
+              WRITE(TFile, VarDate)
             ELSE
-            Copying := FALSE
-        END
+              Copying := FALSE
+          END
     END;
     WRITE(TFile, D);
     IF NOT Copying
     THEN
-    WRITE(TFile, VarDate);
+      WRITE(TFile, VarDate);
     WHILE NOT EOF(DateFile)
     DO
-    BEGIN
+      BEGIN
         READ(DateFile, VarDate);
         WRITE(TFile, VarDate)
-    END;
+      END;
     REWRITE(DateFile);
     RESET(TFile);
     WHILE NOT EOF(TFile)
     DO
-    BEGIN
+      BEGIN
         READ(TFiLe, VarDate);
         WRITE(DateFile, VarDate)
-    END
-END;
-      RESET(DateFile);
+      END
+  END;
+  RESET(DateFile);
   CopyOut(DateFile)
 END.{SortDate}
 

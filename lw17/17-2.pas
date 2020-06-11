@@ -6,7 +6,9 @@ VAR
 PROCEDURE ReadDigit(VAR F: TEXT; VAR D: INTEGER);
 BEGIN{ReadDigit}
   D := 0;
-  READ(F, Ch);  
+  IF NOT(EOLN(F))
+  THEN
+    READ(F, Ch);  
   IF Ch = '1' THEN D := 1 ELSE
   IF Ch = '2' THEN D := 2 ELSE
   IF Ch = '3' THEN D := 3 ELSE
@@ -21,23 +23,21 @@ BEGIN{ReadDigit}
     D := -1;   
 END;{ReadDigit}       
 PROCEDURE ReadNumber(VAR F: TEXT; VAR N: INTEGER);
-CONST
-  MAXINT = 32767;
 BEGIN
   N := 0;
   WHILE NOT(EOLN(F)) AND (D <> -1) 
   DO
     BEGIN
       ReadDigit(F, D);
-      IF (D <> -1) OR (N < MAXINT)
+      IF (D <> -1) OR ((MAXINT DIV 10 = N) AND (MAXINT MOD 10 < D)) OR (MAXINT DIV 10 < N) 
       THEN
         N := 10 * N + D; 
-      IF (N >= MAXINT)
-      THEN
-        BEGIN
-          N := -1;
-          D := -1
-        END  
+       IF (N >= MAXINT)
+       THEN
+         BEGIN
+           N := -1;
+           D := -1
+         END  
     END 
 END;  
 BEGIN {SumDigit}

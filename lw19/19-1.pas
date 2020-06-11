@@ -12,17 +12,21 @@ BEGIN {Prime}
   DO
     BEGIN
       Num := Counter;
-      IF (Counter IN Sieve)
+      IF (Num IN Sieve)
       THEN
-        WRITE(Counter, ', '); 
+        BEGIN
+          Check := Num;
+          WRITE(Counter, '  ');
+        END; 
       WHILE (Num <= MAX)
       DO
         BEGIN
           IF (Num MOD Counter = 0)
           THEN
             Sieve := Sieve - [Num];
-          Num := Num + 1 
+          Num := Num + Check 
         END;      
     Counter := Counter + 1  
-  END;                   
+  END;
+  WRITELN                   
 END. {Prime}  

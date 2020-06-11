@@ -49,7 +49,7 @@ BEGIN {WriteMonth}
   IF Mo = Oct THEN WRITE(FOut, 'OCT') ELSE
   IF Mo = Nov THEN WRITE(FOut, 'NOV') ELSE
   IF Mo = Dec THEN WRITE(FOut, 'DEC')
-  ELSE WRITE(FOut, 'NoMonth')
+    ELSE WRITE(FOut, 'NoMonth')
 END; {WriteMonth}
 FUNCTION Less(VAR D1, D2: Date): BOOLEAN;
 BEGIN {Less}
