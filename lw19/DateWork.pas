@@ -1,7 +1,7 @@
 UNIT DateWork;
 INTERFACE
 TYPE
-  Month = (NoMonth, Jan, Feb, Mar, Apr, May, Jun,
+  Month  = (NoMonth, Jan, Feb, Mar, Apr, May, Jun,
                     Jul, Aug, Sep, Oct, Nov, Dec);
   DayNum = 1..31;
   Date   = RECORD
@@ -77,12 +77,12 @@ PROCEDURE CopyOut(VAR DateFile: FileOfDate);
 VAR
   VarDate: Date;
 BEGIN {CopyOut}
-WHILE NOT EOF(DateFile)
-DO
-  BEGIN
-    READ(DateFile, VarDate);
-    WriteDate(OUTPUT, VarDate);
-    WRITELN(OUTPUT)
-  END
-END;{CopyOut}
+  WHILE NOT EOF(DateFile)
+  DO
+    BEGIN
+      READ(DateFile, VarDate);
+      WriteDate(OUTPUT, VarDate);
+      WRITELN(OUTPUT)
+    END
+  END;{CopyOut}
 END.

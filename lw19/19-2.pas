@@ -37,7 +37,7 @@ BEGIN{SortDate}
             ELSE
               Copying := FALSE
           END
-    END;
+      END;
     WRITE(TFile, D);
     IF NOT Copying
     THEN
@@ -56,7 +56,7 @@ BEGIN{SortDate}
         READ(TFiLe, VarDate);
         WRITE(DateFile, VarDate)
       END
-  END;
+    END;
   RESET(DateFile);
   CopyOut(DateFile)
 END.{SortDate}
