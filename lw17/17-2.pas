@@ -25,19 +25,22 @@ END;{ReadDigit}
 PROCEDURE ReadNumber(VAR F: TEXT; VAR N: INTEGER);
 BEGIN
   N := 0;
-  WHILE NOT(EOLN(F)) AND (D <> -1) 
+  WHILE NOT(EOLN(F)) AND (D <> -1) AND (N <> -1) 
   DO
     BEGIN
       ReadDigit(F, D);
-      IF (D <> -1) OR ((MAXINT DIV 10 = N) AND (MAXINT MOD 10 < D)) OR (MAXINT DIV 10 < N) 
+      IF (D <> -1) 
       THEN
-        N := 10 * N + D; 
-       IF (N >= MAXINT)
-       THEN
-         BEGIN
-           N := -1;
-           D := -1
-         END  
+        IF ((MAXINT DIV 10 = N) AND (MAXINT MOD 10 < D)) OR (MAXINT DIV 10 < N)
+        THEN
+          N := 10 * N + D
+        ELSE            
+          IF (N > MAXINT DIV 10)
+          THEN
+            BEGIN
+              N := -1;
+              D := -1
+            END;  
     END 
 END;  
 BEGIN {SumDigit}
